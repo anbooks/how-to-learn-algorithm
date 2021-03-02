@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <stdlib.h>
+int iCount=0;
+int Queens[8];
+void Output()
+{
+    int i,j,flag=1;
+    printf("第%2d种方案（★表示皇后）：\n",++iCount);
+    printf(" ");
+    for(i=1; i<=8; i++)
+    {
+        printf("▁");
+    }
+    printf(" \n");
+    for(i=0; i<8; i++)
+    {
+        printf(" ");
+        for(j=0; j<8; j++)
+        {
+            if(Queens[i]-1==j)
+                printf("★");
+            else
+            {
+                if(flag<0)
+                    printf("  ");
+                else
+                    printf("■");
+            }
+            flag=-1*flag;
+        }
+        printf("▏ \n");
+        flag=-1*flag;
+    }
+    printf(" ");
+    for(i=1; i<=8; i++)
+    {
+        printf("▔");
+    }
+    printf("\n");
+    getch();
+}
+
+int IsValid(int n)
+{
+    int i;
+    for(i=0; i<n; i++)
+    {
+        if(Queens[i]==Queens[n])
+            return 0;
+        if(abs(Queens[i]-Queens[n])==(n-i))
+            return 0;
+    }
+    return 1;
+}
+void Queen(int n)
+{
+    int i;
+    if(n==8)
+    {
+        Output();
+        return  ;
+    }
+    for(i=1; i<=8; i++)
+    {
+        Queens[n]=i;
+        if(IsValid(n))
+        {
+            Queen(n+1);
+        }
+    }
+}
+int main()
+{
+
+    printf("八皇后排列方案：\n");
+    Queen(0);
+    getch();
+    return 0;
+
+}
