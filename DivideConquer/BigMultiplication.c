@@ -21,6 +21,7 @@ void getFill(char *a,char *b,int ia,int ja,int ib,int jb,int tbool,int move)
         {
             n=b[s]-48;
             stack[r]=(m*n+j)%10;
+            j=(m*n+j)/10;
         }
         if(j)
         {
@@ -72,6 +73,11 @@ int get(char *a,char *b,int ia,int ja,int ib,int jb,int t,int move)
     }
     else if(ib==jb)
     {
+        getFill(b,a,ib,jb,ia,ja,t,move);
+        return 1;
+    }
+    else
+    {
         m=(ja+ia)/2;
         n=(jb+ib)/2;
         s=ja-m;
@@ -94,8 +100,8 @@ int main()
 
     a=(char *)malloc(1000);
     b=(char *)malloc(1000);
-    printf("计算a*b\n");
-    printf("输入a b：");
+    printf("¼ÆËãa*b\n");
+    printf("ÊäÈëa b£º");
     scanf("%s %s",a,b);
 
     result=(char *)malloc(strlen(a)+strlen(b)+2);
@@ -104,7 +110,7 @@ int main()
 
     if(a[0]=='-'&&b[0]=='-')
     {
-    get(a,b,1,strlen(a)-1,1,strlen(b)-1,1,0);
+        get(a,b,1,strlen(a)-1,1,strlen(b)-1,1,0);
     }
 
     if(a[0]=='-'&&b[0]!='-')
@@ -123,12 +129,12 @@ int main()
     }
 
     if(!flag)
-    printf("-");
+        printf("-");
 
     if(result[0])
-    printf("%d",result[0]);
+        printf("%d",result[0]);
 
-    for(n=1;n<pr;n++)
+    for(n=1; n<pr; n++)
     {
         printf("%d",result[n]);
     }
