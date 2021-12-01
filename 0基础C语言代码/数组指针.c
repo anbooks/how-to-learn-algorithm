@@ -1,15 +1,15 @@
-#include <stdlib.h>
+#include <stdio.h>
 int main()
 {
   int temp[5]={1,2,3,4,5};
- /// int (*p2)[5]= temp;
-   int (*p2)[5]= &temp;  //这里需要一个真正的数据地址
+
+   int (*p2)[5]= &temp; 
   int i;
   for(i=0;i<5;i++)
   {
    printf("%d\n",*(*p2+i));
   }
-  
+   
   
 -------------------------------------
   int temp[5]={1,2,3,4,5};
